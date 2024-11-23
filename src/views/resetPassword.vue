@@ -55,12 +55,12 @@ export default {
   mounted() {
     // csrf対策
     // nginxでRPする場合は/sanctumがapi側を見に行くようにしてください
-    this.$axios.get("/sanctum/csrf-cookie");
+    this.axios.get("/sanctum/csrf-cookie");
   },
   methods: {
     async passwordReset() {
       try {
-        await this.$axios
+        await this.axios
           .post("/reset-password", this.form)
           .then((response) => {
             if (response.data[0] == "passwords.reset") {

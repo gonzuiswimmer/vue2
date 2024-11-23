@@ -34,36 +34,36 @@
 
 <script>
 export default {
-  name: 'LoginPage',
+  name: "LoginPage",
   data() {
     return {
       showPassword: false,
       form: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
-    }
+    };
   },
   mounted() {
     // csrf対策
     // nginxでRPする場合は/sanctumがapi側を見に行くようにしてください
-    this.$axios.get('/sanctum/csrf-cookie')
+    this.axios.get("/sanctum/csrf-cookie");
   },
   methods: {
     async login() {
       try {
-        const response = await this.$auth.loginWith('laravelSanctum', {
+        const response = await this.$auth.loginWith("laravelSanctum", {
           data: this.form,
-        })
-        await this.setUserRole(response.data['role'])
-        console.log(response)
+        });
+        await this.setUserRole(response.data["role"]);
+        console.log(response);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
     setUserRole(role) {
-      this.$store.commit('role/setUserRole', role)
+      this.$store.commit("role/setUserRole", role);
     },
   },
-}
+};
 </script>

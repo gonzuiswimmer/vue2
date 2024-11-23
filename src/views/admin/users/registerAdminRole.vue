@@ -63,7 +63,7 @@ export default {
   methods: {
     async searchUser() {
       try {
-        const response = await this.$axios
+        const response = await this.axios
           .get("/api/admin/users", { params: this.searchForm })
           .then((response) => {
             this.setUserInfo(response.data[0].data);
@@ -79,7 +79,7 @@ export default {
     },
     async addAdminUsersRole(id) {
       try {
-        await this.$axios
+        await this.axios
           .post(`/api/admin/users/roles/new/${id}`)
           .then((response) => {
             alert(response.data.addAdminUsersRoleResult);

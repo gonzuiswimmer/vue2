@@ -98,77 +98,77 @@
 </template>
 
 <script>
-import DatePicker from 'vue2-datepicker'
-import 'vue2-datepicker/index.css'
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
 
 export default {
-  name: 'AdminCreate',
+  name: "AdminCreate",
   components: { DatePicker },
   data() {
     return {
       registerUserForm: {
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
         entry_date: null,
         beginner_flg: null,
         department_id: null,
-        gender: '',
+        gender: "",
       },
       assignSituations: [
         {
-          text: '指定なし',
+          text: "指定なし",
           value: null,
         },
         {
-          text: 'アサイン中',
+          text: "アサイン中",
           value: true,
         },
         {
-          text: '待機中',
+          text: "待機中",
           value: false,
         },
       ],
       rules: {
-        required: (v) => !!v || '必須項目です',
-        max255: (v) => v.length <= 255 || '255文字以下で入力してください',
+        required: (v) => !!v || "必須項目です",
+        max255: (v) => v.length <= 255 || "255文字以下で入力してください",
         password: (v) =>
-          v.length >= 8 || 'パスワードは8文字以上で入力してください',
-        email: (v) => /.+@.+/.test(v) || 'メールアドレス形式で入力してください',
+          v.length >= 8 || "パスワードは8文字以上で入力してください",
+        email: (v) => /.+@.+/.test(v) || "メールアドレス形式で入力してください",
         password_confirm: (v) =>
-          v === this.registerUserForm.password || 'パスワードが違います',
+          v === this.registerUserForm.password || "パスワードが違います",
       },
-    }
+    };
   },
   computed: {
     forSelectList() {
-      return this.$store.getters['department/forSelectList']
+      return this.$store.getters["department/forSelectList"];
     },
   },
   mounted() {},
   methods: {
     async registerUser() {
       try {
-        const response = await this.$axios
-          .post('api/admin/users/store', this.registerUserForm)
+        const response = await this.axios
+          .post("api/admin/users/store", this.registerUserForm)
           .then((response) => {
             if (response.data.CreateUserResult) {
-              alert('ユーザーを登録しました')
-              this.$router.push('/admin/users/')
+              alert("ユーザーを登録しました");
+              this.$router.push("/admin/users/");
             } else {
-              alert('登録に失敗しました')
-              this.$router.push('/admin/users/create')
+              alert("登録に失敗しました");
+              this.$router.push("/admin/users/create");
             }
-          })
-        console.log(response)
+          });
+        console.log(response);
       } catch (error) {
-        console.log(error)
-        alert(error.response.data.message)
+        console.log(error);
+        alert(error.response.data.message);
       }
     },
   },
-}
+};
 </script>
 
 <style></style>

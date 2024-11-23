@@ -231,7 +231,7 @@ export default {
   methods: {
     async updateUser() {
       try {
-        await this.$axios
+        await this.axios
           .patch(
             `api/admin/users/update/${this.updateUserForm.id}`,
             this.updateUserForm
@@ -253,7 +253,7 @@ export default {
     },
     async destroyUser() {
       try {
-        await this.$axios
+        await this.axios
           .patch(`/api/admin/users/destroy/${this.$route.params["id"]}`)
           .then((response) => {
             if (response.data.DestroyUserResult) {
@@ -272,7 +272,7 @@ export default {
     },
     async fetchUserEditInfo() {
       try {
-        await this.$axios
+        await this.axios
           .get(`/api/admin/users/edit/${this.$route.params["id"]}`)
           .then((response) => {
             // console.log(response.data.user_profile);

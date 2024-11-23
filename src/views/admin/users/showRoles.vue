@@ -44,7 +44,7 @@ export default {
   methods: {
     async deleteAdminUsersRole(id) {
       try {
-        await this.$axios
+        await this.axios
           .delete(`/api/admin/users/roles/delete/${id}`)
           .then((response) => {
             if (response.data.destroyAdminUserRoleResult) {
@@ -61,7 +61,7 @@ export default {
     },
     async fetchAdminUsers() {
       try {
-        await this.$axios.get("/api/admin/users/roles").then((response) => {
+        await this.axios.get("/api/admin/users/roles").then((response) => {
           this.users = response.data.users;
         });
       } catch (error) {

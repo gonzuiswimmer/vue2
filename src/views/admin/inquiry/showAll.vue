@@ -59,7 +59,7 @@ export default {
     },
     async getInquiriesPerPage(page) {
       try {
-        await this.$axios
+        await this.axios
           .get("/api/admin/inquiry/showAll", {
             params: { page: parseInt(page) },
           }) // /api/admin/inquiry/showAll?page=[page]になる
@@ -72,7 +72,7 @@ export default {
       }
     },
     async fetchInquiries() {
-      await this.$axios.get("/api/admin/inquiry/showAll").then((response) => {
+      await this.axios.get("/api/admin/inquiry/showAll").then((response) => {
         this.setInquiryInfo(response.data.inquiries.data);
         this.setPageInfo(response.data.inquiries);
       });

@@ -81,72 +81,72 @@
 </template>
 
 <script>
-import DatePicker from 'vue2-datepicker'
-import 'vue2-datepicker/index.css'
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
 
 export default {
-  name: 'AdminIndex',
+  name: "AdminIndex",
   components: { DatePicker },
   data() {
     return {
       searchForm: {
-        name: '',
+        name: "",
         hireMonth: null,
         department: null,
-        status: '',
+        status: "",
       },
       users: [],
       page: null, // ページ
       lastPage: null, // 最終ページ
-    }
+    };
   },
   computed: {
     forSelectList() {
-      return this.$store.getters['department/forSelectList']
+      return this.$store.getters["department/forSelectList"];
     },
   },
   methods: {
     clear() {
-      this.searchForm.name = ''
-      this.searchForm.hireMonth = null
-      this.searchForm.department = null
-      this.searchForm.status = ''
+      this.searchForm.name = "";
+      this.searchForm.hireMonth = null;
+      this.searchForm.department = null;
+      this.searchForm.status = "";
     },
     async searchUser() {
       try {
-        const response = await this.$axios
-          .get('/api/admin/users', { params: this.searchForm })
+        const response = await this.axios
+          .get("/api/admin/users", { params: this.searchForm })
           .then((response) => {
-            this.setUserInfo(response.data[0].data)
-            this.setPageInfo(response.data[0])
-          })
-        console.log(response)
+            this.setUserInfo(response.data[0].data);
+            this.setPageInfo(response.data[0]);
+          });
+        console.log(response);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
     setUserInfo(users) {
-      this.users = users
+      this.users = users;
     },
     setPageInfo(params) {
-      this.lastPage = params.last_page
-      this.page = params.current_page
+      this.lastPage = params.last_page;
+      this.page = params.current_page;
     },
     async getUsersPerPage(page) {
       try {
-        await this.$axios
-          .get('/api/admin/users', { params: { page: parseInt(page) } }) // /api/admin/users?page=[page]になる
+        await this.axios
+          .get("/api/admin/users", { params: { page: parseInt(page) } }) // /api/admin/users?page=[page]になる
           .then((response) => {
-            console.log(response)
-            this.setUserInfo(response.data[0].data)
-            this.setPageInfo(response.data[0])
-          })
+            console.log(response);
+            this.setUserInfo(response.data[0].data);
+            this.setPageInfo(response.data[0]);
+          });
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
   },
-}
+};
 </script>
 
 <style></style>
